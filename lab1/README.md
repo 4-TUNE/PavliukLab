@@ -13,4 +13,4 @@
 
 7.Веб зміна
 
-8.додав картинку ![Image alt] (https://github.com/4-TUNE/PavliukLab/blob/main/lab1/IMG_субару.jpg)
+8.додав картинку ![Image alt](https://github.com/4-TUNE/PavliukLab/blob/main/lab1/IMG_субару.jpg)
