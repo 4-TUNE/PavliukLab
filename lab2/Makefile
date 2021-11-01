@@ -9,7 +9,7 @@ install:
 	@echo "--------------------------------------------"
 	@echo " "
 	sudo pip install pipenv
-	sudo pipenv --python 3.8
+	sudo pipenv --python 3.6
 	sudo pipenv install requests
 	sudo pipenv install ntplib
 	sudo pipenv install pytest
