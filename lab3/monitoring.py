@@ -1,6 +1,7 @@
 import requests
 import json
 import logging
+import time
 
 logging.basicConfig(
     filename="server.log",
@@ -29,3 +30,4 @@ if __name__ == '__main__':
     while(True):
         main("http://localhost:8000/health")
         time.sleep(60)
+
