@@ -1,0 +1,21 @@
+INFO 2021-11-26 17:41:11,345 root : Сервер доступний. Час на сервері: Time: 17:41:11   Data: 2021/41/11/26/21
+INFO 2021-11-26 17:41:11,345 root : Запитувана сторінка: : localhost:8000/health/
+INFO 2021-11-26 17:41:11,345 root : Відповідь сервера місти наступні поля:
+INFO 2021-11-26 17:41:11,345 root : Ключ: date, Значення: Time: 17:41:11   Data: 2021/41/11/26/21
+INFO 2021-11-26 17:41:11,346 root : Ключ: current_page, Значення: localhost:8000/health/
+INFO 2021-11-26 17:41:11,346 root : Ключ: server_info, Значення: Name_OS: Linux;   Name_Node: 4db8031462dc;   Release: 5.4.0-89-generic;   Version: #100~18.04.1-Ubuntu SMP Wed Sep 29 10:59:42 UTC 2021;   Indentificator:x86_64
+INFO 2021-11-26 17:41:11,346 root : Ключ: client_info, Значення: Browser: python-requests/2.26.0;   IP: 172.17.0.1
+INFO 2021-11-26 17:49:24,152 root : Сервер доступний. Час на сервері: Time: 17:49:24   Data: 2021/49/11/26/21
+INFO 2021-11-26 17:49:24,153 root : Запитувана сторінка: : localhost:8000/health/
+INFO 2021-11-26 17:49:24,153 root : Відповідь сервера місти наступні поля:
+INFO 2021-11-26 17:49:24,153 root : Ключ: date, Значення: Time: 17:49:24   Data: 2021/49/11/26/21
+INFO 2021-11-26 17:49:24,153 root : Ключ: current_page, Значення: localhost:8000/health/
+INFO 2021-11-26 17:49:24,153 root : Ключ: server_info, Значення: Name_OS: Linux;   Name_Node: a88a9d351144;   Release: 5.4.0-89-generic;   Version: #100~18.04.1-Ubuntu SMP Wed Sep 29 10:59:42 UTC 2021;   Indentificator:x86_64
+INFO 2021-11-26 17:49:24,153 root : Ключ: client_info, Значення: Browser: python-requests/2.26.0;   IP: 172.17.0.1
+INFO 2021-11-26 18:01:35,540 root : Сервер доступний. Час на сервері: Time: 18:01:35   Data: 2021/01/11/26/21
+INFO 2021-11-26 18:01:35,540 root : Запитувана сторінка: : localhost:8000/health/
+INFO 2021-11-26 18:01:35,540 root : Відповідь сервера місти наступні поля:
+INFO 2021-11-26 18:01:35,540 root : Ключ: date, Значення: Time: 18:01:35   Data: 2021/01/11/26/21
+INFO 2021-11-26 18:01:35,540 root : Ключ: current_page, Значення: localhost:8000/health/
+INFO 2021-11-26 18:01:35,540 root : Ключ: server_info, Значення: Name_OS: Linux;   Name_Node: a802cbb70e44;   Release: 5.4.0-89-generic;   Version: #100~18.04.1-Ubuntu SMP Wed Sep 29 10:59:42 UTC 2021;   Indentificator:x86_64
+INFO 2021-11-26 18:01:35,540 root : Ключ: client_info, Значення: Browser: python-requests/2.26.0;   IP: 172.17.0.1
