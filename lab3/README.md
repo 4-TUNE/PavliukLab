@@ -129,4 +129,87 @@ Not Found: /favicon.ico
 [26/Nov/2021 16:31:16] "GET /favicon.ico HTTP/1.1" 404 2440
 ```
 
+#### 11. Роль моніторингу буде здійснювати файл `monitoring.py` який за допомогою бібліотеки `requests` буде опитувати сторінку `health`. Встановив дану бібліотеку командою `sudo pipenv install requests`
+
+#### 12. Як видно із заготовленої функції health() відповідь формується як Пайтон словник і далі обробляється функцією JsonResponse(). У даній заготовці вже є сформована відповідь що містить декілька полів, наприклад date та current_page. Відкрити сторінку /health у браузері і плогін JSON коректно відобразить дані.
+
+#### 13. Здача/захист лабораторної:
+1. ##### Модифікував функцію health так щоб у відповіді були: згенерована на сервері дата, URL сторінки моніторингу, інформація про сервер на якому запущений сайт та інформація про клієнта який робить запит до сервера.
+    
+    Вміст функції `health()` з файлика `main/views.py`:  
+    ```python
+    def health(request):
+        response = {
+        'date': datetime.now().strftime("Time: %H:%M:%S   Data: %Y/%M/%D"),
+        'current_page': request.get_host() + request.get_full_path(),
+        'server_info': "Name_OS: " + os.uname().sysname + ";   " +
+                       "Name_Node: " + os.uname().nodename + ";   " +
+                       "Release: " + os.uname().release + ";   " +
+                       "Version: " + os.uname().version + ";   " +
+                       "Indentificator:" + os.uname().machine,
+        'client_info': "Browser: " + request.META['HTTP_USER_AGENT'] + ";   " + "IP: " + request.META['REMOTE_ADDR']
+        }
+        return JsonResponse(response)
+    ```
+2. ##### Дописав функціонал який буде виводити повідомлення про недоступність сайту у випадку якщо WEB сторінка недоступна.
+    Вміст створеного файлика `monitoring.py`: 
+    ```python
+    import requests
+    import json
+    import logging
+    
+    logging.basicConfig(
+        filename="server.log",
+        filemode='a',
+        level=logging.INFO,
+        format='{levelname} {asctime} {name} : {message}',
+        style='{'
+    )
+    log = logging.getLogger(__name__)
+    
+    
+    def main(url):
+        try:
+        	r = requests.get(url)
+        except Exception as x:
+        	logging.error("Сервер недоступний.")
+        else:
+        	data = json.loads(r.content)
+        	logging.info("Сервер доступний. Час на сервері: %s", data['date'])
+        	logging.info("Запитувана сторінка: : %s", data['current_page'])
+        	logging.info("Відповідь сервера місти наступні поля:")
+        	for key in data.keys():
+        	    logging.info("Ключ: %s, Значення: %s", key, data[key])
+    if __name__ == '__main__':
+        main("http://localhost:8000/health")
+    ```
+    Запуск в консолі:
+    ```text
+   roma2@roma2-VirtualBox:~/tpis/PavliukLab/lab3$ cat server.log
+INFO 2021-11-26 18:41:35,664 root : Сервер доступний. Час на сервері: Time: 16:41:35   Data: 2021/41/11/26/21
+INFO 2021-11-26 18:41:35,664 root : Запитувана сторінка: : localhost:8000/health/
+INFO 2021-11-26 18:41:35,664 root : Відповідь сервера місти наступні поля:
+INFO 2021-11-26 18:41:35,664 root : Ключ: date, Значення: Time: 16:41:35   Data: 2021/41/11/26/21
+INFO 2021-11-26 18:41:35,664 root : Ключ: current_page, Значення: localhost:8000/health/
+INFO 2021-11-26 18:41:35,664 root : Ключ: server_info, Значення: Name_OS: Linux;   Name_Node: roma2-VirtualBox;   Release: 5.4.0-89-generic;   Version: #100~18.04.1-Ubuntu SMP Wed Sep 29 10:59:42 UTC 2021;   Indentificator:x86_64
+INFO 2021-11-26 18:41:35,664 root : Ключ: client_info, Значення: Browser: python-requests/2.26.0;   IP: 127.0.0.1
+
+    ```
+3. ##### Після запуску моніторингу запит йде лише один раз після чого програма закінчується я  зробив так щоб дана програма запускалась раз в хвилину та працювала в бекграунді.
+   Додані елементи до файлика `monitoring.py`: 
+    ```python
+    if __name__ == '__main__':
+        while(True):
+            main("http://localhost:8000/health")
+            time.sleep(60)
+    ```
+4. ##### Cпростив роботу з пайтон середовищем через швидкий виклик довгих команд, для цього звернув увагу на секцію `scripts` у `Pipfile`. Таксамо як викладач додав аліас на запуск сервера який тепер буде стартувати за командою `pipenv run server`. Зрообив аліас на запус моніторингу командою `pipenv run monitoring`.
+    Секція `script` в файлику `Pipfile`:
+    ```text
+    [scripts]
+    server = "python manage.py runserver 0.0.0.0:8000"
+    monitoring = "python monitoring.py"
+    ```
+   
+#### 14. Запустив сервер та переконався що головна сторінка відображається. Перейшов у інше вікно консолі та запустив програму моніторингу. Закомітив файл логів server.logs до репозиторію.
 
